@@ -10,15 +10,15 @@ import java.util.UUID;
  */
 public class ClientBean implements IBean {
     private UUID uuid;
-    private String login; // must be unique
-    private String password; // hash
-    private String name; // what other clients see
+    private String login; // Must be unique (but is not actually)
+    private String password; // Hash
+    private String identifier; // Unique identifier to find a client
 
-    public ClientBean(UUID uuid, String login, String password, String name) {
+    public ClientBean(UUID uuid, String login, String password, String identifier) {
         this.uuid = uuid;
         this.login = login;
         this.password = password;
-        this.name = name;
+        this.identifier = identifier;
     }
 
     public void setUuid(UUID uuid) {
@@ -41,12 +41,12 @@ public class ClientBean implements IBean {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String identifier) {
+        this.identifier = identifier;
     }
 
     @Override

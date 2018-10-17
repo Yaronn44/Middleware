@@ -13,14 +13,14 @@ public class AuctionBean implements IBean {
     private int price;
     private String name;
     private String description;
-    private String vendeur;
+    private String seller;
 
-    public AuctionBean(int price, String name, String description, String vendeur) {
+    public AuctionBean(int price, String name, String description, String seller) {
     	if (price > 0) this.price = price;
     	else this.price = 0;
         this.name = name;
         this.description = description;
-        this.vendeur = vendeur;
+        this.seller = seller;
     }
 
     @Override
@@ -56,12 +56,12 @@ public class AuctionBean implements IBean {
         this.description = description;
     }
 
-	public String getVendeur() {
-		return vendeur;
+	public String getSeller() {
+		return seller;
 	}
 
-	public void setVendeur(String vendeur) {
-		this.vendeur = vendeur;
+	public void setVendeur(String seller) {
+		this.seller = seller;
 	}
     
     

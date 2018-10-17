@@ -51,5 +51,5 @@ public interface IClient extends Remote, Serializable {
 
     void setState(ClientState newState) throws RemoteException;
 
-    void setEstVendeur(boolean v) throws RemoteException;
+    void setIsSeller(boolean v) throws RemoteException;
 }

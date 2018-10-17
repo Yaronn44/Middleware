@@ -2,6 +2,7 @@ package com.alma.pay2bid;
 
 import com.alma.pay2bid.client.Client;
 import com.alma.pay2bid.gui.ClientGui;
+import com.alma.pay2bid.gui.GetClientName;
 import com.alma.pay2bid.server.IServer;
 import com.alma.pay2bid.server.Server;
 import org.apache.commons.cli.*;
@@ -21,16 +22,22 @@ public class Main {
     private static final Logger LOGGER = Logger.getLogger(Server.class.getCanonicalName());
 
     private static void startClient(String host, int port) {
+
         try {
+            GetClientName getClientName = new GetClientName();
+            String clientName = getClientName.getName();
+
+            if(clientName == null){throw new Exception("Client exit without choosing a name...");}
+
             IServer server = (IServer) LocateRegistry.getRegistry(host, port).lookup("com.alma.pay2bid.server.Server");
-            Client client = new Client(server);
+            Client client = new Client(server, clientName);
 
             ClientGui c = new ClientGui(client, server);
 
             c.show();
         } catch (Exception  e) {
         	if(e instanceof ConnectException)
-        		System.out.println("Aucun serveur n'a été démarré !");
+        		System.out.println("Server has not been launch !");
         	else
         		e.printStackTrace();
         }

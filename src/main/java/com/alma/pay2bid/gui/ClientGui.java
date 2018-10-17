@@ -52,6 +52,7 @@ public class ClientGui {
      * @param client
      */
     public ClientGui(Client client, IServer server) throws RemoteException, InterruptedException {
+
         this.client = client;
         this.server = server;
         auctionList = new HashMap<UUID, AuctionView>();
@@ -68,50 +69,21 @@ public class ClientGui {
         createGui();
     }
 
-
     /**
      * Initialize the GUI & populate it with the base elements
      */
     private void createGui() {
 
-        // Block pour définir le nom du client
-        boolean hasName = false;
-        String[] options = {"OK"};
-        JPanel panel = new JPanel();
-        JLabel lbl = new JLabel("Entrez votre nom: ");
-        JTextField txt = new JTextField(10);
-        panel.add(lbl);
-        panel.add(txt);
-
-        while (!hasName) {
-
-            int selectedOption = JOptionPane.showOptionDialog(null, panel, "", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-            if (selectedOption == 0) {
-                String text = txt.getText();
-                if (text.length() > 1) {
-                    hasName = true;
-                    try {
-                        client.setName(text);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                    JOptionPane.showMessageDialog(mainFrame, "Hello " + text + '!');
-                }
-            }
-        }
-
         // Create the Main JFrame
         try{
-            mainFrame = new JFrame("Pay2Bid - User : " + client.getName());
+            mainFrame = new JFrame("Pay2Bid - User : " + client.getIdentifier());
         }catch(Exception e){
             System.out.println(e);
         }
-        Dimension dimension = new Dimension(500, 500);
-        mainFrame.setSize(500, 500);
+        Dimension dimension = new Dimension(500, 300);
+        mainFrame.setSize(500, 300);
         mainFrame.setMaximumSize(dimension);
         mainFrame.setLayout(new BorderLayout());
-
 
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -185,7 +157,7 @@ public class ClientGui {
             JButton raiseBidButton = new JButton("Raise the bid");
             raiseBidButton.setActionCommand("raiseBid");
             raiseBidButton.addActionListener(new RaiseBidButtonListener(client, client.getServer(), auction, statusLabel));
-            if (this.client.getEstVendeur()) {
+            if (this.client.getIsSeller()) {
               raiseBidButton.setEnabled(false);
               raiseBidButton.setVisible(false);
               auction.setEnableBidTextField(false);
@@ -199,7 +171,7 @@ public class ClientGui {
                 @Override
                 public void updateNewPrice(UUID auctionID, Integer price) {
                     setAuctionPrice(auctionID, price);
-                    if (!client.getEstVendeur()) {
+                    if (!client.getIsSeller()) {
                     		auction.enable();
                     }		
                 }

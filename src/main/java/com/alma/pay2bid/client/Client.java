@@ -42,7 +42,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
                 time -=TIME_TO_REFRESH;
                 timeString = Long.toString(time/1000);
                 if(time == 0) {
-                		if (!Client.this.estVendeur) {
+                		if (!Client.this.isSeller) {
                 			server.timeElapsed(Client.this);
                 		}
                 } else {
@@ -72,12 +72,12 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     private ClientBean identity;
     private IServer server;
+    private String name;
+    private ClientState state;
+    private boolean isSeller;
     private transient Timer timer;
     private AuctionBean currentAuction;
-    private String name;
     private String timeElapsed;
-    private ClientState state;
-    private boolean estVendeur;
 
     // collections of observers used to connect the client to the GUI
     private transient Collection<ITimerObserver> newTimerObservers = new ArrayList<ITimerObserver>();
@@ -94,14 +94,18 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      * @param name
      * @throws RemoteException
      */
-    public Client(IServer server) throws RemoteException {
+    public Client(IServer server, String name) throws RemoteException {
+
         super();
 
-        identity = new ClientBean(UUID.randomUUID(), name, "default password", name);
+        UUID uuid = UUID.randomUUID();
+        String identifier = name + " #" + uuid.toString().substring(0,4);
+
+        identity = new ClientBean(uuid, name, "default password", identifier);
         this.server = server;
-        this.name = "inconnu";
-        this.estVendeur = false;
+        this.name = name;
         state = ClientState.WAITING;
+        this.isSeller = false;
     }
 
     /**
@@ -112,10 +116,10 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     @Override
     public void newAuction(AuctionBean auction) throws RemoteException {
         LOGGER.info("New auction received from the server");
-        if (this.getName().equals(auction.getVendeur())) {
-    			this.setEstVendeur(true);
+        if (this.getName().equals(auction.getSeller())) {
+    			this.setIsSeller(true);
         } else { 
-    			this.setEstVendeur(false);
+    			this.setIsSeller(false);
         }
         currentAuction = auction;
 
@@ -132,7 +136,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     /**
      * Submit a new auction to the server
-     * @param auction
+     * @param auction The submitted auction
      * @throws RemoteException
      */
     @Override
@@ -143,7 +147,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     /**
      * An item has been sold to a client
-     * @param buyer
+     * @param buyer The client who bought the current auction
      * @throws RemoteException
      */
     @Override
@@ -152,7 +156,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
         currentAuction = null;
 
-        this.estVendeur = false;
+        this.isSeller = false;
 
         timer.cancel();
         timer = null;
@@ -168,8 +172,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     /**
      * Update the price of an item
-     * @param auctionID
-     * @param price
+     * @param auctionID UUID of the auction
+     * @param price Price of the auction
      * @throws RemoteException
      */
     @Override
@@ -256,11 +260,13 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         return newTimerObservers.remove(observer);
     }
 
-    public boolean getEstVendeur(){
-      return this.estVendeur;
+    public boolean getIsSeller(){
+      return this.isSeller;
     }
 
-    public void setEstVendeur(boolean v) throws RemoteException{
-      this.estVendeur = v ;
+    public void setIsSeller(boolean v) throws RemoteException{
+      this.isSeller = v ;
     }
+
+    public String getIdentifier(){return identity.getIdentifier(); }
 }

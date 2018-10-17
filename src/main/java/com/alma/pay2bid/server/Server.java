@@ -77,7 +77,7 @@ public class Server extends UnicastRemoteObject implements IServer {
         nbParticipants = clients.size() - 1; // we do not count the seller as an active participant
 
         currentAuction = auctions.poll();
-        LOGGER.info("Auction '" + currentAuction.getName() + "' by "+currentAuction.getVendeur()+" launched !");
+        LOGGER.info("Auction '" + currentAuction.getName() + "' by "+ currentAuction.getSeller()+" launched !");
 
         // notify the client's that a new auction has begun
         for (IClient client : clients) {
@@ -95,7 +95,7 @@ public class Server extends UnicastRemoteObject implements IServer {
         // generate a new UUID for the incoming auction, then put it in the queue
         auction.setUuid(UUID.randomUUID());
         auctions.add(auction);
-        LOGGER.info("Auction '" + auction.getName() + "' from "+auction.getVendeur()+"placed in queue");
+        LOGGER.info("Auction " + auction.getName() + " from " + auction.getSeller() + " placed in queue");
         if (!auctionInProgress && (auctions.size() == 1) && (clients.size() >= MIN_NUMBER_CLIENTS)) {
             launchAuction();
         }
@@ -112,8 +112,12 @@ public class Server extends UnicastRemoteObject implements IServer {
             while (auctionInProgress) {
                 wait();
             }
+
             clients.add(client);
-            LOGGER.info("client " + client.toString() + " connected");
+            LOGGER.info("Client " + client.getName() + " connected");
+            LOGGER.info("Client " + client.toString());
+            LOGGER.info(" ");
+
         } catch (InterruptedException e) {
             LOGGER.warning(e.getMessage());
         }
