@@ -64,6 +64,8 @@ public class AuctionBean implements IBean {
 		this.seller = seller;
 	}
     
-    
+    public String toString(){
+        return "uuid : " + uuid + " \n name : " + name + " \n";
+    }
 
 }

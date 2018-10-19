@@ -29,6 +29,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      * A timer used to measure time between rounds
      */
     private class TimerManager extends TimerTask {
+
         private String timeString;
         private long time = TIME_TO_RAISE_BID;
 
@@ -42,9 +43,9 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
                 time -=TIME_TO_REFRESH;
                 timeString = Long.toString(time/1000);
                 if(time == 0) {
-                		if (!Client.this.isSeller) {
-                			server.timeElapsed(Client.this);
-                		}
+                    if (!Client.this.isSeller) {
+                        server.timeElapsed(Client.this);
+                    }
                 } else {
                     for(ITimerObserver o : newTimerObservers){
                         o.updateTimer(timeString);
@@ -115,8 +116,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      */
     @Override
     public void newAuction(AuctionBean auction) throws RemoteException {
-        LOGGER.info("New auction received from the server");
-        if (this.getName().equals(auction.getSeller())) {
+        LOGGER.info("New auction received from the server \n");
+        if (this.getIdentifier().equals(auction.getSeller())) {
     			this.setIsSeller(true);
         } else { 
     			this.setIsSeller(false);
@@ -141,7 +142,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      */
     @Override
     public void submit(AuctionBean auction) throws RemoteException {
-        LOGGER.info("New auction submitted to the server");
+        LOGGER.info("New auction submitted to the server \n");
         server.placeAuction(auction);
     }
 
@@ -152,7 +153,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      */
     @Override
     public void bidSold(IClient buyer) throws RemoteException {
-        LOGGER.info((buyer == null ? "nobody" : buyer.getName()) + " won " + currentAuction.getName());
+
+        LOGGER.info((buyer == null ? "nobody" : buyer.getIdentifier()) + " won " + currentAuction.getName() + "\n");
 
         currentAuction = null;
 
@@ -167,6 +169,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         for (IBidSoldObserver observer : bidSoldObservers) {
         	if(buyer != null)
         		observer.updateBidSold(buyer);
+        	else
+        	    observer.updateBidSold();
         }
     }
 
@@ -178,7 +182,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      */
     @Override
     public void newPrice(UUID auctionID, int price) throws RemoteException {
-        LOGGER.info("New price received for the current auction");
+        LOGGER.info("New price received for the current auction \n");
 
         currentAuction.setPrice(price);
 
@@ -268,5 +272,6 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
       this.isSeller = v ;
     }
 
+    @Override
     public String getIdentifier(){return identity.getIdentifier(); }
 }

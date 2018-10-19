@@ -27,7 +27,7 @@ public class AuctionView {
 
     public AuctionView(AuctionBean auction){
         auctionPanel = new JPanel();
-        auctionPanel.setMaximumSize(new Dimension(500, 200));
+        auctionPanel.setMaximumSize(new Dimension(600, 200));
         auctionPanel.setLayout(new GridLayout(7, 3, 5, 5));
 
         // Create the price label
@@ -61,7 +61,6 @@ public class AuctionView {
         auctionPanel.add(auctionBid);
         auctionPanel.setBorder(BorderFactory.createTitledBorder(auction.getName()));
 
-
     }
 
     public void setCurrentWinner(String name) {
@@ -82,7 +81,11 @@ public class AuctionView {
     }
 
     public void setWinner(String name) {
-        auctionBidLabel.setText("Winner : " + name);
+        if (name != null) {
+            auctionBidLabel.setText("Winner : " + name);
+        } else{
+            auctionBidLabel.setText("There is no winner for this auction");
+        }
         auctionCurrentWinnerLabel.setVisible(false);
         auctionCurrentWinnerValue.setVisible(false);
         auctionBid.setVisible(false);

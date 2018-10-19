@@ -36,9 +36,10 @@ public class Main {
 
             c.show();
         } catch (Exception  e) {
-        	if(e instanceof ConnectException)
-        		System.out.println("Server has not been launch !");
-        	else
+        	if(e instanceof ConnectException) {
+                System.out.println("Server has not been launch !");
+                System.exit(0);
+            } else
         		e.printStackTrace();
         }
     }
@@ -49,7 +50,7 @@ public class Main {
             IServer server = new Server();
             Registry registry = LocateRegistry.createRegistry(port);
             registry.rebind(name, server);
-            LOGGER.info("Server up and running at localhost on port " + port);
+            LOGGER.info("Server up and running at localhost on port " + port + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

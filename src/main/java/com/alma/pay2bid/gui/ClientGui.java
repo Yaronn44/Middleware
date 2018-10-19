@@ -56,7 +56,6 @@ public class ClientGui {
         this.client = client;
         this.server = server;
         auctionList = new HashMap<UUID, AuctionView>();
-        server.register(this.client);
 
         client.addNewAuctionObserver(new INewAuctionObserver() {
             @Override
@@ -67,6 +66,8 @@ public class ClientGui {
         });
         // paint the GUI
         createGui();
+
+        server.register(this.client);
     }
 
     /**
@@ -89,7 +90,6 @@ public class ClientGui {
             @Override
             public void windowClosing(WindowEvent windowEvent){
                 try {
-                    server.timeElapsed(client);
                     server.disconnect(client);
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -102,13 +102,11 @@ public class ClientGui {
 
         // Create the Menu bar
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Options");
         JMenuItem newAuction = new JMenuItem("New Auction");
         newAuction.setActionCommand("newAuction");
         newAuction.addActionListener(new AuctionInputListener(this));
-        menu.add(newAuction);
+        menuBar.add(newAuction);
 
-        menuBar.add(menu);
         mainFrame.setJMenuBar(menuBar);
 
         // Create the Frame Header
@@ -149,7 +147,7 @@ public class ClientGui {
      */
     private void addAuctionPanel(AuctionBean auctionBean){
         if(!auctionList.containsKey(auctionBean.getUUID())) {
-            LOGGER.info("Add new auction to auctionPanel");
+            LOGGER.info("Add new auction to auctionPanel \n");
 
             auctionPanel.removeAll();
             final AuctionView auction = new AuctionView(auctionBean);
@@ -182,10 +180,15 @@ public class ClientGui {
                 @Override
                 public void updateBidSold(IClient client) {
                     try {
-                        auction.setWinner(client.getName());
+                        auction.setWinner(client.getIdentifier());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
+                }
+
+                @Override
+                public void updateBidSold() {
+                    auction.setWinner(null);
                 }
             });
 
@@ -203,7 +206,7 @@ public class ClientGui {
             mainPanel.repaint();
 
         } else {
-            LOGGER.warning("Trying to add a duplicated auction to the list - Auction : " + auctionBean.toString());
+            LOGGER.warning("Trying to add a duplicated auction to the list - Auction : " + auctionBean.toString() + "\n");
         }
     }
 
@@ -211,14 +214,14 @@ public class ClientGui {
      * Set an new price for a given AuctionBean
      */
     private void setAuctionPrice(UUID auctionID, int newPrice){
-        LOGGER.info("auctionPrice set !");
+        LOGGER.info("auctionPrice set ! \n");
         AuctionView auction = auctionList.get(auctionID);
         //UPDATE AUCTION IN OUR LIST
         auction.setPrice(newPrice);
 
           //update the current winner
         try {
-          auction.setCurrentWinner(server.getWinner().getName());
+          auction.setCurrentWinner(server.getWinner().getIdentifier());
         } catch (RemoteException e){
             e.printStackTrace();
         }

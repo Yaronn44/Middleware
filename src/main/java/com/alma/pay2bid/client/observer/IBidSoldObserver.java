@@ -10,4 +10,5 @@ import com.alma.pay2bid.client.IClient;
  */
 public interface IBidSoldObserver {
     void updateBidSold(IClient client);
+    void updateBidSold();
 }
