@@ -40,10 +40,19 @@ public interface IClient extends Remote, Serializable {
     void newPrice(UUID auctionID, int price) throws RemoteException;
 
     /**
+     * @param auctionID
+     * @param price
+     * @throws RemoteException
+     */
+    void updatePrice(UUID auctionID, int price) throws RemoteException;
+
+    /**
      * @return
      * @throws RemoteException
      */
     String getName() throws RemoteException;
+
+    void addAuctionWin(AuctionBean auction) throws RemoteException;
 
     String getIdentifier() throws RemoteException;
 

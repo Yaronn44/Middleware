@@ -79,6 +79,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     private transient Timer timer;
     private AuctionBean currentAuction;
     private String timeElapsed;
+    private List<AuctionBean> auctionsWin;
 
     // collections of observers used to connect the client to the GUI
     private transient Collection<ITimerObserver> newTimerObservers = new ArrayList<ITimerObserver>();
@@ -102,11 +103,12 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         UUID uuid = UUID.randomUUID();
         String identifier = name + " #" + uuid.toString().substring(0,4);
 
-        identity = new ClientBean(uuid, name, "default password", identifier);
+        this.identity = new ClientBean(uuid, name, "default password", identifier);
         this.server = server;
         this.name = name;
-        state = ClientState.WAITING;
+        this.state = ClientState.WAITING;
         this.isSeller = false;
+        this.auctionsWin = new ArrayList<AuctionBean>();
     }
 
     /**
@@ -200,6 +202,28 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         for (INewPriceObserver observer : newPriceObservers) {
             observer.updateNewPrice(auctionID, price);
         }
+    }
+
+    /**
+     * Update the price of an item
+     * @param auctionID UUID of the auction
+     * @param price Price of the auction
+     * @throws RemoteException
+     */
+    @Override
+    public void updatePrice(UUID auctionID, int price) throws RemoteException {
+        LOGGER.info("New price received for the current auction \n");
+
+        currentAuction.setPrice(price);
+
+        // notify the observers of the new price for the current auction
+        for (INewPriceObserver observer : newPriceObservers) {
+            observer.updateNewPrice(auctionID, price);
+        }
+    }
+
+    public void addAuctionWin(AuctionBean auction) throws RemoteException{
+            this.auctionsWin.add(auction);
     }
 
     public IServer getServer(){ return server;}

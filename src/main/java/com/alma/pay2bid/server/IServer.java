@@ -2,6 +2,7 @@ package com.alma.pay2bid.server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import com.alma.pay2bid.bean.AuctionBean;
 import com.alma.pay2bid.client.IClient;
@@ -41,6 +42,21 @@ public interface IServer extends Remote {
      * @throws InterruptedException
      */
     void timeElapsed(IClient client) throws RemoteException, InterruptedException;
+
+    /**
+     * Notifies the server that a client's timer has reach zero.
+     * @param client
+     * @throws RemoteException
+     * @throws InterruptedException
+     */
+    void clientDisconnection(IClient client) throws RemoteException, InterruptedException;
+
+    /**
+     * Notifies the server that a clients have crashed
+     * @param clientsCrashed
+     * @throws RemoteException
+     */
+     void clientsCrashed(List<IClient> clientsCrashed) throws RemoteException;
 
     IClient getWinner() throws RemoteException;
     
