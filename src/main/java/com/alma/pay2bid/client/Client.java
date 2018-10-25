@@ -226,6 +226,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
             this.auctionsWin.add(auction);
     }
 
+    public List<AuctionBean> getAuctionsWin(){return auctionsWin;}
+
     public IServer getServer(){ return server;}
 
     @Override
@@ -274,9 +276,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     }
 
     @Override
-    public boolean removeNewAuctionObserver(INewAuctionObserver observer) {
-        return newAuctionObservers.remove(observer);
-    }
+    public boolean removeNewAuctionObserver(INewAuctionObserver observer) { return newAuctionObservers.remove(observer); }
 
     @Override
     public boolean addTimerObserver(ITimerObserver observer) {

@@ -8,6 +8,7 @@ import com.alma.pay2bid.client.observer.INewAuctionObserver;
 import com.alma.pay2bid.client.observer.INewPriceObserver;
 import com.alma.pay2bid.client.observer.ITimerObserver;
 import com.alma.pay2bid.gui.listeners.AuctionInputListener;
+import com.alma.pay2bid.gui.listeners.AuctionWinListener;
 import com.alma.pay2bid.gui.listeners.RaiseBidButtonListener;
 import com.alma.pay2bid.server.IServer;
 
@@ -106,6 +107,11 @@ public class ClientGui {
         newAuction.setActionCommand("newAuction");
         newAuction.addActionListener(new AuctionInputListener(this));
         menuBar.add(newAuction);
+
+        JMenuItem winAuctions = new JMenuItem("Auctions win");
+        winAuctions.setActionCommand("winAuctions");
+        winAuctions.addActionListener(new AuctionWinListener(this));
+        menuBar.add(winAuctions);
 
         mainFrame.setJMenuBar(menuBar);
 
@@ -216,7 +222,8 @@ public class ClientGui {
     private void setAuctionPrice(UUID auctionID, int newPrice){
         LOGGER.info("auctionPrice set ! \n");
         AuctionView auction = auctionList.get(auctionID);
-        //UPDATE AUCTION IN OUR LIST
+
+        // Update auction in our list
         auction.setPrice(newPrice);
 
           //update the current winner
@@ -226,7 +233,7 @@ public class ClientGui {
             e.printStackTrace();
         }
 
-        //RELOAD THE MAIN PANEL
+        //Reload the main panel
         auction.getAuctionPanel().revalidate();
         auction.getAuctionPanel().repaint();
 
@@ -235,10 +242,26 @@ public class ClientGui {
     }
 
     /**
+     * Add a new auction win by the client in the auctions win panel
+     */
+
+    private void addAuctionWin(UUID auctionID){
+        LOGGER.info("Auction add the win auctions panel \n");
+        AuctionView auction = auctionList.get(auctionID);
+
+
+    }
+
+    /**
      * Create the menu to add a new Auction
      */
     public void newAuctionView() {
         AuctionInput input = new AuctionInput(client);
         input.showFrame();
+    }
+
+    public void winAuctionsView(){
+        AuctionWinView auctionsWin = new AuctionWinView();
+        auctionsWin.showAuctionWin(client.getAuctionsWin());
     }
 }
