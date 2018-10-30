@@ -10,5 +10,5 @@ import java.util.UUID;
  * @author Thomas Minier
  */
 public interface IBean extends Serializable {
-    UUID getUUID();
+    UUID getUuid();
 }

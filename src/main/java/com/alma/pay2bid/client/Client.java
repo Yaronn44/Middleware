@@ -30,10 +30,12 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      */
     private class TimerManager extends TimerTask {
 
+        private UUID auctionId;
         private String timeString;
         private long time = TIME_TO_RAISE_BID;
 
-        public TimerManager(String timeMessage){
+        public TimerManager(UUID auctionId, String timeMessage){
+            this.auctionId = auctionId;
             this.timeString = timeMessage;
         }
 
@@ -43,13 +45,12 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
                 time -=TIME_TO_REFRESH;
                 timeString = Long.toString(time/1000);
                 if(time == 0) {
-                    if (!Client.this.isSeller) {
-                        server.timeElapsed(Client.this);
+                    if (!Client.this.isSellerList.get(auctionId)) {
+                        server.timeElapsed(auctionId,Client.this);
                     }
                 } else {
-                    for(ITimerObserver o : newTimerObservers){
-                        o.updateTimer(timeString);
-                    }
+                    if(newTimerObservers.get(auctionId) != null)
+                        newTimerObservers.get(auctionId).updateTimer(timeString);
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -68,21 +69,22 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     }
 
     private static final Logger LOGGER = Logger.getLogger(Client.class.getCanonicalName());
-    private static final long TIME_TO_RAISE_BID = 30000;
+    private final long TIME_TO_RAISE_BID = 30000;
     private static final long TIME_TO_REFRESH = 1000;
+
+    private HashMap<UUID, AuctionBean> auctionList;
+    private HashMap<UUID, ClientState> stateList;
+    private HashMap<UUID, Boolean> isSellerList;
+    private transient HashMap<UUID, Timer> timerList;
 
     private ClientBean identity;
     private IServer server;
     private String name;
-    private ClientState state;
-    private boolean isSeller;
-    private transient Timer timer;
-    private AuctionBean currentAuction;
-    private String timeElapsed;
+    private String timeElapsed = "";
     private List<AuctionBean> auctionsWin;
 
     // collections of observers used to connect the client to the GUI
-    private transient Collection<ITimerObserver> newTimerObservers = new ArrayList<ITimerObserver>();
+    private transient HashMap<UUID, ITimerObserver> newTimerObservers = new HashMap<UUID, ITimerObserver>();
     private transient Collection<IBidSoldObserver> bidSoldObservers = new ArrayList<IBidSoldObserver>();
     private transient Collection<INewAuctionObserver> newAuctionObservers = new ArrayList<INewAuctionObserver>();
     private transient Collection<INewPriceObserver> newPriceObservers = new ArrayList<INewPriceObserver>();
@@ -106,9 +108,13 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         this.identity = new ClientBean(uuid, name, "default password", identifier);
         this.server = server;
         this.name = name;
-        this.state = ClientState.WAITING;
-        this.isSeller = false;
         this.auctionsWin = new ArrayList<AuctionBean>();
+
+        auctionList = new HashMap<UUID, AuctionBean>();
+        stateList = new HashMap<UUID, ClientState>();
+        isSellerList = new HashMap<UUID, Boolean>();
+        timerList = new HashMap<UUID, Timer>();
+
     }
 
     /**
@@ -117,20 +123,24 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      * @throws RemoteException
      */
     @Override
-    public void newAuction(AuctionBean auction) throws RemoteException {
+    public void newAuction(UUID auctionId, AuctionBean auction) throws RemoteException {
         LOGGER.info("New auction received from the server \n");
+
         if (this.getIdentifier().equals(auction.getSeller())) {
-    			this.setIsSeller(true);
-        } else { 
-    			this.setIsSeller(false);
+    			this.isSellerList.put(auctionId, true);
+        } else {
+            this.isSellerList.put(auctionId, false);
         }
-        currentAuction = auction;
+        auctionList.put(auctionId, auction);
 
-        timer = new Timer();
-        timer.schedule(new TimerManager(timeElapsed),0, TIME_TO_REFRESH);
+        Timer newTimer = new Timer();
+        newTimer.schedule(new TimerManager(auctionId, timeElapsed),0, TIME_TO_REFRESH);
+        timerList.put(auctionId, newTimer);
 
-        state = ClientState.WAITING;
+        stateList.put(auctionId, ClientState.WAITING);
 
+
+        //TODO nearly sure have to modify this
         // notify the observers of the new auction
         for (INewAuctionObserver observer : newAuctionObservers) {
             observer.updateNewAuction(auction);
@@ -154,19 +164,21 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
      * @throws RemoteException
      */
     @Override
-    public void bidSold(IClient buyer) throws RemoteException {
+    public void bidSold(UUID auctionId, IClient buyer) throws RemoteException {
 
-        LOGGER.info((buyer == null ? "nobody" : buyer.getIdentifier()) + " won " + currentAuction.getName() + "\n");
+        LOGGER.info((buyer == null ? "nobody" : buyer.getIdentifier())
+                + " won " + auctionList.get(auctionId).getName() + "\n");
 
-        currentAuction = null;
+        auctionList.remove(auctionId);
+        isSellerList.remove(auctionId);
 
-        this.isSeller = false;
+        timerList.get(auctionId).cancel();
+        timerList.remove(auctionId);
 
-        timer.cancel();
-        timer = null;
+        stateList.put(auctionId, ClientState.ENDING);
+        stateList.remove(auctionId);
 
-        state = ClientState.ENDING;
-
+        //TODO nearly sure have to modify this
         // notify the observers of the new bid
         for (IBidSoldObserver observer : bidSoldObservers) {
         	if(buyer != null)
@@ -178,47 +190,50 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     /**
      * Update the price of an item
-     * @param auctionID UUID of the auction
+     * @param auctionId UUID of the auction
      * @param price Price of the auction
      * @throws RemoteException
      */
     @Override
-    public void newPrice(UUID auctionID, int price) throws RemoteException {
+    public void newPrice(UUID auctionId, int price) throws RemoteException {
         LOGGER.info("New price received for the current auction \n");
 
-        currentAuction.setPrice(price);
+        auctionList.get(auctionId).setPrice(price);
 
-        if(timer != null) {
-            timer.cancel();
-            timer = null;
+        if(timerList.get(auctionId) != null){
+            timerList.get(auctionId).cancel();
+            timerList.remove(auctionId);
         }
 
-        timer = new Timer();
-        timer.schedule(new TimerManager(timeElapsed),0, TIME_TO_REFRESH);
+        Timer newTimer = new Timer();
+        newTimer.schedule(new TimerManager(auctionId, timeElapsed),0, TIME_TO_REFRESH);
+        timerList.put(auctionId, newTimer);
 
-        state = ClientState.WAITING;
+        stateList.put(auctionId, ClientState.WAITING);
 
+        //TODO nearly sure have to modify this
         // notify the observers of the new price for the current auction
         for (INewPriceObserver observer : newPriceObservers) {
-            observer.updateNewPrice(auctionID, price);
+            observer.updateNewPrice(auctionId, price);
         }
     }
 
     /**
      * Update the price of an item
-     * @param auctionID UUID of the auction
+     * @param auctionId UUID of the auction
      * @param price Price of the auction
      * @throws RemoteException
      */
     @Override
-    public void updatePrice(UUID auctionID, int price) throws RemoteException {
+    public void updatePrice(UUID auctionId, int price) throws RemoteException {
         LOGGER.info("New price received for the current auction \n");
 
-        currentAuction.setPrice(price);
+        auctionList.get(auctionId).setPrice(price);
 
+        //TODO nearly sure have to modify this
         // notify the observers of the new price for the current auction
         for (INewPriceObserver observer : newPriceObservers) {
-            observer.updateNewPrice(auctionID, price);
+            observer.updateNewPrice(auctionId, price);
         }
     }
 
@@ -241,13 +256,13 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     }
 
     @Override
-    public ClientState getState() throws RemoteException {
-        return state;
+    public ClientState getState(UUID auctionId) throws RemoteException {
+        return stateList.get(auctionId);
     }
 
     @Override
-    public void setState(ClientState state) {
-        this.state = state;
+    public void setState(UUID auctionId, ClientState state) {
+        this.stateList.put(auctionId, state);
     }
 
     @Override
@@ -279,21 +294,21 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     public boolean removeNewAuctionObserver(INewAuctionObserver observer) { return newAuctionObservers.remove(observer); }
 
     @Override
-    public boolean addTimerObserver(ITimerObserver observer) {
-        return newTimerObservers.add(observer);
+    public void addTimerObserver(UUID auctionId, ITimerObserver observer) {
+        newTimerObservers.put(auctionId, observer);
     }
 
     @Override
-    public boolean removeTimerObserver(ITimerObserver observer) {
-        return newTimerObservers.remove(observer);
+    public void removeTimerObserver(ITimerObserver observer) {
+        newTimerObservers.remove(observer);
     }
 
-    public boolean getIsSeller(){
-      return this.isSeller;
+    public boolean getIsSeller(UUID auctionId){
+      return this.isSellerList.get(auctionId);
     }
 
-    public void setIsSeller(boolean v) throws RemoteException{
-      this.isSeller = v ;
+    public void setIsSeller(UUID auctionId, boolean v) throws RemoteException{
+      this.isSellerList.put(auctionId, v);
     }
 
     @Override

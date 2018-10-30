@@ -2,6 +2,8 @@ package com.alma.pay2bid.client.observable;
 
 import com.alma.pay2bid.client.observer.ITimerObserver;
 
+import java.util.UUID;
+
 /**
  * An observable that notifies its observers when a timer has been updated
  * @author Alexis Giraudet
@@ -9,7 +11,7 @@ import com.alma.pay2bid.client.observer.ITimerObserver;
  * @author Thomas Minier
  */
 public interface ITimerObservable  {
-    boolean addTimerObserver(ITimerObserver observer);
+    void addTimerObserver(UUID auctionId, ITimerObserver observer);
 
-    boolean removeTimerObserver(ITimerObserver observer);
+    void removeTimerObserver(ITimerObserver observer);
 }

@@ -38,7 +38,7 @@ public class ClientGui {
     private static final Logger LOGGER = Logger.getLogger(ClientGui.class.getCanonicalName());
     private Client client;
     private IServer server;
-    private HashMap<UUID, AuctionView> auctionList;
+    private HashMap<UUID, AuctionView> auctionsList;
 
     /**
      * Main frame & elements
@@ -56,7 +56,7 @@ public class ClientGui {
 
         this.client = client;
         this.server = server;
-        auctionList = new HashMap<UUID, AuctionView>();
+        auctionsList = new HashMap<UUID, AuctionView>();
 
         client.addNewAuctionObserver(new INewAuctionObserver() {
             @Override
@@ -117,7 +117,7 @@ public class ClientGui {
 
         // Create the Frame Header
         JLabel headerLabel = new JLabel("", JLabel.CENTER);
-        headerLabel.setText("Current Auction");
+        headerLabel.setText("Current Auctions");
 
         statusLabel = new JLabel("", JLabel.CENTER);
         statusLabel.setBackground(Color.red);
@@ -152,16 +152,17 @@ public class ClientGui {
      * @param auctionBean
      */
     private void addAuctionPanel(AuctionBean auctionBean){
-        if(!auctionList.containsKey(auctionBean.getUUID())) {
+        if(!auctionsList.containsKey(auctionBean.getUuid())) {
             LOGGER.info("Add new auction to auctionPanel \n");
 
-            auctionPanel.removeAll();
+            //auctionPanel.removeAll();
             final AuctionView auction = new AuctionView(auctionBean);
             
             JButton raiseBidButton = new JButton("Raise the bid");
             raiseBidButton.setActionCommand("raiseBid");
-            raiseBidButton.addActionListener(new RaiseBidButtonListener(client, client.getServer(), auction, statusLabel));
-            if (this.client.getIsSeller()) {
+
+            raiseBidButton.addActionListener(new RaiseBidButtonListener(auctionBean.getUuid(), client, client.getServer(), auction, statusLabel));
+            if (this.client.getIsSeller(auctionBean.getUuid())) {
               raiseBidButton.setEnabled(false);
               raiseBidButton.setVisible(false);
               auction.setEnableBidTextField(false);
@@ -173,9 +174,9 @@ public class ClientGui {
             //Now add the observer to receive all price updates
             client.addNewPriceObserver(new INewPriceObserver() {
                 @Override
-                public void updateNewPrice(UUID auctionID, Integer price) {
-                    setAuctionPrice(auctionID, price);
-                    if (!client.getIsSeller()) {
+                public void updateNewPrice(UUID auctionId, Integer price) {
+                    setAuctionPrice(auctionId, price);
+                    if (!client.getIsSeller(auctionId)) {
                     		auction.enable();
                     }		
                 }
@@ -198,7 +199,7 @@ public class ClientGui {
                 }
             });
 
-            client.addTimerObserver(new ITimerObserver() {
+            client.addTimerObserver(auctionBean.getUuid(), new ITimerObserver() {
                 @Override
                 public void updateTimer(String time) {
                     auction.setAuctionTimer(time);
@@ -206,7 +207,7 @@ public class ClientGui {
             });
 
             auctionPanel.add(auction.getAuctionPanel());
-            auctionList.put(auctionBean.getUUID(), auction);
+            auctionsList.put(auctionBean.getUuid(), auction);
 
             mainPanel.revalidate();
             mainPanel.repaint();
@@ -219,16 +220,16 @@ public class ClientGui {
     /**
      * Set an new price for a given AuctionBean
      */
-    private void setAuctionPrice(UUID auctionID, int newPrice){
+    private void setAuctionPrice(UUID auctionId, int newPrice){
         LOGGER.info("auctionPrice set ! \n");
-        AuctionView auction = auctionList.get(auctionID);
+        AuctionView auction = auctionsList.get(auctionId);
 
         // Update auction in our list
         auction.setPrice(newPrice);
 
           //update the current winner
         try {
-          auction.setCurrentWinner(server.getWinner().getIdentifier());
+          auction.setCurrentWinner(server.getWinner(auctionId).getIdentifier());
         } catch (RemoteException e){
             e.printStackTrace();
         }
@@ -239,17 +240,6 @@ public class ClientGui {
 
         mainPanel.revalidate();
         mainPanel.repaint();
-    }
-
-    /**
-     * Add a new auction win by the client in the auctions win panel
-     */
-
-    private void addAuctionWin(UUID auctionID){
-        LOGGER.info("Auction add the win auctions panel \n");
-        AuctionView auction = auctionList.get(auctionID);
-
-
     }
 
     /**

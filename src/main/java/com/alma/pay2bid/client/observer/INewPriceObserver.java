@@ -9,5 +9,5 @@ import java.util.UUID;
  * @author Thomas Minier
  */
 public interface INewPriceObserver {
-    void updateNewPrice(UUID auctionID, Integer price);
+    void updateNewPrice(UUID auctionId, Integer price);
 }

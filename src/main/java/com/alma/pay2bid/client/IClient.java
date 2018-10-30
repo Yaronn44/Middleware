@@ -18,7 +18,7 @@ public interface IClient extends Remote, Serializable {
      * @param auction
      * @throws RemoteException
      */
-    void newAuction(AuctionBean auction) throws RemoteException;
+    void newAuction(UUID auctionId, AuctionBean auction) throws RemoteException;
 
     /**
      * @param auction
@@ -30,21 +30,21 @@ public interface IClient extends Remote, Serializable {
      * @param buyer
      * @throws RemoteException
      */
-    void bidSold(IClient buyer) throws RemoteException;
+    void bidSold(UUID auctionId, IClient buyer) throws RemoteException;
 
     /**
-     * @param auctionID
+     * @param auctionId
      * @param price
      * @throws RemoteException
      */
-    void newPrice(UUID auctionID, int price) throws RemoteException;
+    void newPrice(UUID auctionId, int price) throws RemoteException;
 
     /**
-     * @param auctionID
+     * @param auctionId
      * @param price
      * @throws RemoteException
      */
-    void updatePrice(UUID auctionID, int price) throws RemoteException;
+    void updatePrice(UUID auctionId, int price) throws RemoteException;
 
     /**
      * @return
@@ -58,9 +58,9 @@ public interface IClient extends Remote, Serializable {
 
     void setName(String name) throws RemoteException;
 
-    ClientState getState() throws RemoteException;
+    ClientState getState(UUID auctionId) throws RemoteException;
 
-    void setState(ClientState newState) throws RemoteException;
+    void setState(UUID auctionId, ClientState newState) throws RemoteException;
 
-    void setIsSeller(boolean v) throws RemoteException;
+    void setIsSeller(UUID auctionId, boolean v) throws RemoteException;
 }

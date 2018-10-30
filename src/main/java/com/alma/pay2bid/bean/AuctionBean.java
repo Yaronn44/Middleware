@@ -24,7 +24,7 @@ public class AuctionBean implements IBean {
     }
 
     @Override
-    public UUID getUUID() {
+    public UUID getUuid() {
         return uuid;
     }
 
@@ -60,7 +60,7 @@ public class AuctionBean implements IBean {
 		return seller;
 	}
 
-	public void setVendeur(String seller) {
+	public void setSeller(String seller) {
 		this.seller = seller;
 	}
     

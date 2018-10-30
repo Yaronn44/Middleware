@@ -21,6 +21,9 @@ public class ClientBean implements IBean {
         this.identifier = identifier;
     }
 
+    @Override
+    public UUID  getUuid(){ return this.uuid; }
+
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
@@ -45,12 +48,7 @@ public class ClientBean implements IBean {
         return identifier;
     }
 
-    public void setName(String identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-
-    @Override
-    public UUID getUUID() {
-        return uuid;
     }
 }

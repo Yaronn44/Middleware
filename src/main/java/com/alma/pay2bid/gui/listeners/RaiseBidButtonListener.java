@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.UUID;
 
 /**
  * An ActionListener called to raise the bid of an item
@@ -17,13 +18,15 @@ import java.rmi.RemoteException;
  * @author Thomas Minier
  */
 public class RaiseBidButtonListener implements ActionListener {
+    private UUID auctionId;
     private IClient client;
     private IServer server;
     private AuctionView auctionView;
     private JTextField bidField;
     private JLabel statusLabel;
 
-    public RaiseBidButtonListener(IClient client, IServer server, AuctionView gui, JLabel statusLabel) {
+    public RaiseBidButtonListener(UUID auctionId, IClient client, IServer server, AuctionView gui, JLabel statusLabel) {
+        this.auctionId = auctionId;
         this.client = client;
         this.server = server;
         auctionView = gui;
@@ -38,13 +41,13 @@ public class RaiseBidButtonListener implements ActionListener {
             try {
             	int bidFieldValue = Integer.valueOf(bidField.getText());
 
-	        	if(bidFieldValue > server.getCurrentAuction().getPrice()) {
+	        	if(bidFieldValue > server.getAuction(auctionId).getPrice()) {
 	        		statusLabel.setText("New bid sent.");
 	        		
-	                server.raiseBid(client, bidFieldValue);
+	                server.raiseBid(auctionId, client, bidFieldValue);
 	                auctionView.disable();
 	                try {
-						server.timeElapsed(this.client);
+						server.timeElapsed(auctionId, this.client);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
