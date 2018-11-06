@@ -52,7 +52,7 @@ public interface IClient extends Remote, Serializable {
      */
     String getName() throws RemoteException;
 
-    void addAuctionWin(AuctionBean auction) throws RemoteException;
+    void addWonAuction(AuctionBean auction) throws RemoteException;
 
     String getIdentifier() throws RemoteException;
 

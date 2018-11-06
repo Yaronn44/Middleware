@@ -218,7 +218,7 @@ public class Server extends UnicastRemoteObject implements IServer {
                 bidByClientList.get(auctionId).clear();
 
                 if(winnersList.get(auctionId) != null) {
-                    winnersList.get(auctionId).addAuctionWin(auctionsList.get(auctionId));
+                    winnersList.get(auctionId).addWonAuction(auctionsList.get(auctionId));
                 }
 
                 // Validate the registrations of clients in the monitor's queue
@@ -270,7 +270,7 @@ public class Server extends UnicastRemoteObject implements IServer {
                     }
 
                     if (winnersList.get(auctionId) != null) {
-                        winnersList.get(auctionId).addAuctionWin(auctionValue);
+                        winnersList.get(auctionId).addWonAuction(auctionValue);
                     }
 
                     bidByClientList.get(auctionId).clear();
@@ -345,7 +345,7 @@ public class Server extends UnicastRemoteObject implements IServer {
                     }
 
                     if (winnersList.get(auctionId) != null) {
-                        winnersList.get(auctionId).addAuctionWin(auctionValue);
+                        winnersList.get(auctionId).addWonAuction(auctionValue);
                     }
 
                     bidByClientList.get(auctionId).clear();

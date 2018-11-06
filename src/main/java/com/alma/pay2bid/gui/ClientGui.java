@@ -108,16 +108,17 @@ public class ClientGui {
         newAuction.addActionListener(new AuctionInputListener(this));
         menuBar.add(newAuction);
 
-        JMenuItem winAuctions = new JMenuItem("Auctions win");
-        winAuctions.setActionCommand("winAuctions");
-        winAuctions.addActionListener(new AuctionWinListener(this));
-        menuBar.add(winAuctions);
+        JMenuItem wonAuctions = new JMenuItem("Won Auctions");
+        wonAuctions.setActionCommand("wonAuctions");
+        wonAuctions.addActionListener(new AuctionWinListener(this));
+        menuBar.add(wonAuctions);
 
         mainFrame.setJMenuBar(menuBar);
 
         // Create the Frame Header
         JLabel headerLabel = new JLabel("", JLabel.CENTER);
         headerLabel.setText("Current Auctions");
+        LOGGER.info("updated auctions counter");
 
         statusLabel = new JLabel("", JLabel.CENTER);
         statusLabel.setBackground(Color.red);
@@ -211,6 +212,7 @@ public class ClientGui {
 
             mainPanel.revalidate();
             mainPanel.repaint();
+            mainFrame.repaint();
 
         } else {
             LOGGER.warning("Trying to add a duplicated auction to the list - Auction : " + auctionBean.toString() + "\n");
@@ -250,8 +252,9 @@ public class ClientGui {
         input.showFrame();
     }
 
-    public void winAuctionsView(){
-        AuctionWinView auctionsWin = new AuctionWinView();
-        auctionsWin.showAuctionWin(client.getAuctionsWin());
+    public void wonAuctionsView(){
+        AuctionWinView wonAuctions = new AuctionWinView();
+        wonAuctions.showWonAuctions(client.getWonAuctions());
     }
+
 }

@@ -16,23 +16,23 @@ public class AuctionWinView extends JPanel{
     /**
      * Properties for the main panel
      */
-    private JFrame auctionWinFrame;
-    private JPanel auctionWinPanel;
+    private JFrame wonAuctionsFrame;
+    private JPanel wonAuctionsPanel;
 
     public AuctionWinView(){
 
-        auctionWinFrame = new JFrame("List of auctions win");
+        wonAuctionsFrame = new JFrame("List of won auctions");
         Dimension dimension = new Dimension(500, 300);
-        auctionWinFrame.setSize(500, 300);
-        auctionWinFrame.setMaximumSize(dimension);
+        wonAuctionsFrame.setSize(500, 300);
+        wonAuctionsFrame.setMaximumSize(dimension);
 
-        auctionWinPanel = new JPanel();
-        auctionWinPanel.setMaximumSize(new Dimension(600, 200));
-        auctionWinPanel.setLayout(new GridLayout(0,4, 5, 5));
+        wonAuctionsPanel = new JPanel();
+        wonAuctionsPanel.setMaximumSize(new Dimension(600, 200));
+        wonAuctionsPanel.setLayout(new GridLayout(0,4, 5, 5));
 
-        auctionWinFrame.add(auctionWinPanel);
+        wonAuctionsFrame.add(wonAuctionsPanel);
 
-        auctionWinFrame.addWindowListener(new WindowAdapter() {
+        wonAuctionsFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent){
                 hideFrame();
@@ -42,37 +42,37 @@ public class AuctionWinView extends JPanel{
 
 
     public void showFrame(){
-        auctionWinFrame.setVisible(true);
+        wonAuctionsFrame.setVisible(true);
     }
 
-    public void hideFrame(){ auctionWinFrame.setVisible(false); }
+    public void hideFrame(){ wonAuctionsFrame.setVisible(false); }
 
 
-    public void showAuctionWin(java.util.List<AuctionBean> auctionsWin){
+    public void showWonAuctions(java.util.List<AuctionBean> wonAuctions){
 
-        for(AuctionBean auction : auctionsWin){
+        for(AuctionBean auction : wonAuctions){
             // Create the name label
             JLabel auctionNameLabel = new JLabel(" Name : ");
             JLabel auctionNameValue = new JLabel("");
             auctionNameValue.setText(auction.getName());
             auctionNameValue.setLabelFor(auctionNameLabel);
-            auctionWinPanel.add(auctionNameLabel);
-            auctionWinPanel.add(auctionNameValue);
+            wonAuctionsPanel.add(auctionNameLabel);
+            wonAuctionsPanel.add(auctionNameValue);
 
             // Create the price label
             JLabel auctionPriceLabel = new JLabel(" Price : ");
             JLabel auctionPriceValue = new JLabel("");
             auctionPriceValue.setText(Integer.toString(auction.getPrice()));
             auctionPriceValue.setLabelFor(auctionPriceLabel);
-            auctionWinPanel.add(auctionPriceLabel);
-            auctionWinPanel.add(auctionPriceValue);
+            wonAuctionsPanel.add(auctionPriceLabel);
+            wonAuctionsPanel.add(auctionPriceValue);
         }
 
         showFrame();
     }
 
     public JPanel getAuctionPanel() {
-        return auctionWinPanel;
+        return wonAuctionsPanel;
     }
 
 }

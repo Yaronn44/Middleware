@@ -81,7 +81,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     private IServer server;
     private String name;
     private String timeElapsed = "";
-    private List<AuctionBean> auctionsWin;
+    private List<AuctionBean> wonAuctions;
 
     // collections of observers used to connect the client to the GUI
     private transient HashMap<UUID, ITimerObserver> newTimerObservers = new HashMap<UUID, ITimerObserver>();
@@ -108,7 +108,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         this.identity = new ClientBean(uuid, name, "default password", identifier);
         this.server = server;
         this.name = name;
-        this.auctionsWin = new ArrayList<AuctionBean>();
+        this.wonAuctions = new ArrayList<AuctionBean>();
 
         auctionList = new HashMap<UUID, AuctionBean>();
         stateList = new HashMap<UUID, ClientState>();
@@ -237,11 +237,11 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         }
     }
 
-    public void addAuctionWin(AuctionBean auction) throws RemoteException{
-            this.auctionsWin.add(auction);
+    public void addWonAuction(AuctionBean auction) throws RemoteException{
+            this.wonAuctions.add(auction);
     }
 
-    public List<AuctionBean> getAuctionsWin(){return auctionsWin;}
+    public List<AuctionBean> getWonAuctions(){return wonAuctions;}
 
     public IServer getServer(){ return server;}
 

@@ -15,8 +15,8 @@ public class AuctionWinListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String command = actionEvent.getActionCommand();
-        if("winAuctions".equals(command))  {
-            gui.winAuctionsView();
+        if("wonAuctions".equals(command))  {
+            gui.wonAuctionsView();
         }
     }
 }
