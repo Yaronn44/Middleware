@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3107c59a-199e-447b-a5d7-bd4e75d7f0bb" name="Default" comment="corrected appearances of &quot;auctions win&quot; to &quot;won auctions&quot; (excepted in class names)">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/IBidSoldObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/IBidSoldObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewPriceObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewPriceObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,102 +61,120 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-408">
-              <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+            <state relative-caret-position="239">
+              <caret line="297" column="21" lean-forward="true" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#15323#15332#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="AuctionBean.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/AuctionBean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="7" selection-start-column="7" selection-end-column="7" />
+            <state relative-caret-position="311">
+              <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
+            <state relative-caret-position="124">
+              <caret line="224" selection-start-line="224" selection-end-line="224" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2240#2241#0" expanded="true" />
                 <element signature="e#2281#2282#0" expanded="true" />
                 <element signature="e#2337#2338#0" expanded="true" />
                 <element signature="e#2389#2390#0" expanded="true" />
+                <element signature="e#3128#3150#0" expanded="true" />
+                <element signature="e#3238#3262#0" expanded="true" />
+                <element signature="e#3355#3376#0" expanded="true" />
+                <element signature="e#3465#3490#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionInputListener.java">
+      <file leaf-file-name="INewPriceObservable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewPriceObservable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+            <state relative-caret-position="195">
+              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClientGui.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+            <state relative-caret-position="84">
+              <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
+              <folding>
+                <element signature="e#1866#2120#0" expanded="true" />
+                <element signature="e#2119#2120#0" expanded="true" />
+                <element signature="e#2466#2888#0" expanded="true" />
+                <element signature="e#2887#2888#0" expanded="true" />
+                <element signature="e#5962#6300#0" expanded="true" />
+                <element signature="e#6299#6300#0" expanded="true" />
+                <element signature="e#7129#7315#0" expanded="true" />
+                <element signature="e#7314#7315#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="AuctionView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
-              <caret line="103" column="36" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+            <state relative-caret-position="-252">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionWinView.java">
+      <file leaf-file-name="AuctionInput.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionInput.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+            <state relative-caret-position="465">
+              <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="IClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+            <state relative-caret-position="491">
+              <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/ClientBean.java">
+      <file leaf-file-name="ClientState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/ClientState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="120">
+              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java">
+      <file leaf-file-name="INewAuctionObservable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="255">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,35 +186,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>TImer</find>
-      <find>timeString</find>
-      <find>TimerMa</find>
-      <find>setIsS</find>
-      <find>bidTh</find>
-      <find>rais</find>
-      <find>pair</find>
-      <find>auctionCounter</find>
-      <find>getCurrent</find>
-      <find>auctionID</find>
-      <find>currentAuction</find>
-      <find>raise</find>
-      <find>auctionC</find>
-      <find>auctionsList</find>
-      <find>timeElap</find>
-      <find>updateNe</find>
-      <find>auctionTimer</find>
-      <find>updateTimer</find>
-      <find>static</find>
-      <find>addTimerObserver</find>
-      <find>setAuctionTimer</find>
-      <find>newTimerObservers</find>
-      <find>timerObs</find>
+      <find>timeEla</find>
+      <find>new</find>
+      <find>updateNewAuction</find>
+      <find>bidSol</find>
+      <find>updateNewPr</find>
+      <find>ITimerOb</find>
+      <find>addTimer</find>
+      <find>addBidSoldObserver</find>
+      <find>new bid</find>
+      <find>bidSold</find>
+      <find>Timer</find>
+      <find>auctionPanel</find>
       <find>auction</find>
-      <find>win</find>
-      <find>current</find>
-      <find>won</find>
-      <find>repa</find>
-      <find>repai</find>
+      <find>NewPrice</find>
+      <find>addNewPriceObserver</find>
+      <find>addAuction</find>
+      <find>newAuction</find>
+      <find>addAuctionObserver</find>
+      <find>newAuctionObservers</find>
+      <find>Disconnec</find>
+      <find>Di</find>
+      <find>bidThis</find>
+      <find>bidThisRoundList</find>
+      <find>raisebid</find>
+      <find>validate</find>
+      <find>End of a round.</find>
+      <find>seller</find>
+      <find>nbParticipant</find>
+      <find>nameClientsBidList</find>
+      <find>raiseBid</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,15 +230,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/ClientBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/AuctionBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/INewPriceObserver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionWinView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionWinListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionInputListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/IBidSoldObservable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewPriceObservable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java" />
       </list>
     </option>
   </component>
@@ -221,11 +252,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="135" />
-    <option name="y" value="-14" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -239,37 +270,46 @@
           <expand>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -278,7 +318,27 @@
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="observable" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="observer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -287,7 +347,7 @@
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -297,44 +357,19 @@
             </path>
             <path>
               <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="alma" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pay2bid" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="alma" type="462c0819:PsiDirectoryNode" />
-              <item name="pay2bid" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -361,7 +396,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.alma.pay2bid.Main" />
       <module name="pay2bid" />
@@ -372,9 +407,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.alma.pay2bid.Main" />
@@ -387,27 +419,54 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
       <properties />
       <listeners />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
@@ -435,6 +494,7 @@
       <workItem from="1540800606733" duration="4874000" />
       <workItem from="1540827951710" duration="6788000" />
       <workItem from="1540911680142" duration="4989000" />
+      <workItem from="1541594792492" duration="16181000" />
     </task>
     <task id="LOCAL-00001" summary="corrected appearances of &quot;auctions win&quot; to &quot;won auctions&quot; (excepted in class names)">
       <created>1541501528333</created>
@@ -447,40 +507,39 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23161000" />
+    <option name="totallyTimeSpent" value="39342000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35969663" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.25460455" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.27672955" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5503145" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23212913" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3990964" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,6 +567,104 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1395">
+          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15323#15332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2400">
+          <caret line="179" selection-start-line="179" selection-end-line="179" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2240#2241#0" expanded="true" />
+            <element signature="e#2281#2282#0" expanded="true" />
+            <element signature="e#2337#2338#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#3128#3150#0" expanded="true" />
+            <element signature="e#3238#3262#0" expanded="true" />
+            <element signature="e#3355#3376#0" expanded="true" />
+            <element signature="e#3465#3490#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionInputListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1410">
+          <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+          <folding>
+            <element signature="e#1866#2120#0" expanded="true" />
+            <element signature="e#2119#2120#0" expanded="true" />
+            <element signature="e#2466#2888#0" expanded="true" />
+            <element signature="e#2887#2888#0" expanded="true" />
+            <element signature="e#5962#6300#0" expanded="true" />
+            <element signature="e#6299#6300#0" expanded="true" />
+            <element signature="e#7129#7315#0" expanded="true" />
+            <element signature="e#7314#7315#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="103" column="36" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionWinView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/ClientBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/IServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -515,80 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/IBidSoldObservable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/IBidSoldObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/INewAuctionObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/INewPriceObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/GetClientName.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-370">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/ClientState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/RaiseBidButtonListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/SubmitAuctionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-615">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -606,93 +693,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/AuctionBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionWinListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="103" column="36" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionWinView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
+        <state relative-caret-position="900">
           <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/ClientBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionInputListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2240#2241#0" expanded="true" />
-            <element signature="e#2281#2282#0" expanded="true" />
-            <element signature="e#2337#2338#0" expanded="true" />
-            <element signature="e#2389#2390#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408">
-          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,6 +704,190 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionInputListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/AuctionWinListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/RaiseBidButtonListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/listeners/SubmitAuctionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/ClientBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/INewAuctionObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/IBidSoldObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observer/INewPriceObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/IBidSoldObservable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/ITimerObservable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewPriceObservable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/observable/INewAuctionObservable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/ClientState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/IClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/bean/AuctionBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="224" selection-start-line="224" selection-end-line="224" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2240#2241#0" expanded="true" />
+            <element signature="e#2281#2282#0" expanded="true" />
+            <element signature="e#2337#2338#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#3128#3150#0" expanded="true" />
+            <element signature="e#3238#3262#0" expanded="true" />
+            <element signature="e#3355#3376#0" expanded="true" />
+            <element signature="e#3465#3490#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/AuctionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="297" column="21" lean-forward="true" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15323#15332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/alma/pay2bid/gui/ClientGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
+          <folding>
+            <element signature="e#1866#2120#0" expanded="true" />
+            <element signature="e#2119#2120#0" expanded="true" />
+            <element signature="e#2466#2888#0" expanded="true" />
+            <element signature="e#2887#2888#0" expanded="true" />
+            <element signature="e#5962#6300#0" expanded="true" />
+            <element signature="e#6299#6300#0" expanded="true" />
+            <element signature="e#7129#7315#0" expanded="true" />
+            <element signature="e#7314#7315#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

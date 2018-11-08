@@ -85,9 +85,9 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
     // collections of observers used to connect the client to the GUI
     private transient HashMap<UUID, ITimerObserver> newTimerObservers = new HashMap<UUID, ITimerObserver>();
-    private transient Collection<IBidSoldObserver> bidSoldObservers = new ArrayList<IBidSoldObserver>();
+    private transient HashMap<UUID, IBidSoldObserver> bidSoldObservers = new HashMap<UUID, IBidSoldObserver>();
     private transient Collection<INewAuctionObserver> newAuctionObservers = new ArrayList<INewAuctionObserver>();
-    private transient Collection<INewPriceObserver> newPriceObservers = new ArrayList<INewPriceObserver>();
+    private transient HashMap<UUID, INewPriceObserver> newPriceObservers = new HashMap<UUID, INewPriceObserver>();
 
     /**
      * To get a server reference:
@@ -139,12 +139,9 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
         stateList.put(auctionId, ClientState.WAITING);
 
-
-        //TODO nearly sure have to modify this
         // notify the observers of the new auction
-        for (INewAuctionObserver observer : newAuctionObservers) {
+        for(INewAuctionObserver observer : newAuctionObservers)
             observer.updateNewAuction(auction);
-        }
     }
 
     /**
@@ -178,14 +175,12 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
         stateList.put(auctionId, ClientState.ENDING);
         stateList.remove(auctionId);
 
-        //TODO nearly sure have to modify this
         // notify the observers of the new bid
-        for (IBidSoldObserver observer : bidSoldObservers) {
-        	if(buyer != null)
-        		observer.updateBidSold(buyer);
-        	else
-        	    observer.updateBidSold();
-        }
+
+        if(buyer != null)
+            bidSoldObservers.get(auctionId).updateBidSold(buyer);
+        else
+            bidSoldObservers.get(auctionId).updateBidSold();
     }
 
     /**
@@ -211,11 +206,7 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
         stateList.put(auctionId, ClientState.WAITING);
 
-        //TODO nearly sure have to modify this
-        // notify the observers of the new price for the current auction
-        for (INewPriceObserver observer : newPriceObservers) {
-            observer.updateNewPrice(auctionId, price);
-        }
+        newPriceObservers.get(auctionId).updateNewPrice(auctionId, price);
     }
 
     /**
@@ -230,11 +221,8 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
 
         auctionList.get(auctionId).setPrice(price);
 
-        //TODO nearly sure have to modify this
         // notify the observers of the new price for the current auction
-        for (INewPriceObserver observer : newPriceObservers) {
-            observer.updateNewPrice(auctionId, price);
-        }
+        newPriceObservers.get(auctionId).updateNewPrice(auctionId, price);
     }
 
     public void addWonAuction(AuctionBean auction) throws RemoteException{
@@ -266,29 +254,21 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     }
 
     @Override
-    public boolean addNewPriceObserver(INewPriceObserver observer) {
-        return newPriceObservers.add(observer);
+    public void addNewPriceObserver(UUID auctionId, INewPriceObserver observer) { newPriceObservers.put(auctionId, observer); }
+
+    @Override
+    public void removeNewPriceObserver(UUID auctionId) {
+        newPriceObservers.remove(auctionId);
     }
 
     @Override
-    public boolean removeNewPriceObserver(INewPriceObserver observer) {
-        return newPriceObservers.remove(observer);
-    }
+    public void addBidSoldObserver(UUID auctionId, IBidSoldObserver observer) { bidSoldObservers.put(auctionId, observer); }
 
     @Override
-    public boolean addBidSoldObserver(IBidSoldObserver observer) {
-        return bidSoldObservers.add(observer);
-    }
+    public void removeBidSoldObserver(UUID auctionId) { bidSoldObservers.remove(auctionId); }
 
     @Override
-    public boolean removeBidSoldObserver(IBidSoldObserver observer) {
-        return bidSoldObservers.remove(observer);
-    }
-
-    @Override
-    public boolean addNewAuctionObserver(INewAuctionObserver observer) {
-        return newAuctionObservers.add(observer);
-    }
+    public boolean addNewAuctionObserver(INewAuctionObserver observer) { return newAuctionObservers.add(observer); }
 
     @Override
     public boolean removeNewAuctionObserver(INewAuctionObserver observer) { return newAuctionObservers.remove(observer); }
@@ -299,14 +279,16 @@ public class Client extends UnicastRemoteObject implements IClient, IBidSoldObse
     }
 
     @Override
-    public void removeTimerObserver(ITimerObserver observer) {
-        newTimerObservers.remove(observer);
+    public void removeTimerObserver(UUID auctionId) {
+        newTimerObservers.remove(auctionId);
     }
 
-    public boolean getIsSeller(UUID auctionId){
-      return this.isSellerList.get(auctionId);
+    @Override
+    public boolean getIsSeller(UUID auctionId) throws RemoteException{
+          return this.isSellerList.get(auctionId);
     }
 
+    @Override
     public void setIsSeller(UUID auctionId, boolean v) throws RemoteException{
       this.isSellerList.put(auctionId, v);
     }

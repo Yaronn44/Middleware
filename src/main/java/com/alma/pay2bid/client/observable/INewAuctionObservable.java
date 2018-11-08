@@ -2,6 +2,8 @@ package com.alma.pay2bid.client.observable;
 
 import com.alma.pay2bid.client.observer.INewAuctionObserver;
 
+import java.util.UUID;
+
 /**
  * A observable that notifies its observers when a new auction has begun
  * @author Alexis Giraudet

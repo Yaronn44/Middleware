@@ -2,6 +2,8 @@ package com.alma.pay2bid.client.observable;
 
 import com.alma.pay2bid.client.observer.IBidSoldObserver;
 
+import java.util.UUID;
+
 /**
  * An observable that notifies its observers when an item has been sold
  * @author Alexis Giraudet
@@ -9,7 +11,7 @@ import com.alma.pay2bid.client.observer.IBidSoldObserver;
  * @author Thomas Minier
  */
 public interface IBidSoldObservable {
-    boolean addBidSoldObserver(IBidSoldObserver observer);
+    void addBidSoldObserver(UUID auctionId, IBidSoldObserver observer);
 
-    boolean removeBidSoldObserver(IBidSoldObserver observer);
+    void removeBidSoldObserver(UUID auctionId);
 }

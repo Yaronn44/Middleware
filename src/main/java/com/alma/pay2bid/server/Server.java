@@ -132,6 +132,7 @@ public class Server extends UnicastRemoteObject implements IServer {
         try {
             // TODO find a new way to add the client without letting him be in the currents auctions but without letting him
             // TODO wait for all auctions to finish
+            if(auctionsList.isEmpty()) auctionInProgress = false;
             while (auctionInProgress) {
                 wait();
             }
@@ -154,9 +155,8 @@ public class Server extends UnicastRemoteObject implements IServer {
     @Override
     public void disconnect(IClient client) throws RemoteException, InterruptedException {
         try {
-			LOGGER.info("Disconnect : Client " + client.toString() + "\n");
+			LOGGER.info("Disconnect : Client " + client.getIdentifier() + "\n");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         this.clientDisconnection(client);
@@ -186,9 +186,10 @@ public class Server extends UnicastRemoteObject implements IServer {
         if((client.getState(auctionId) == ClientState.WAITING) && (newBid > auctionsList.get(auctionId).getPrice())) {
             bidByClientList.get(auctionId).put(client, newBid);
             bidThisRoundList.put(auctionId, bidThisRoundList.get(auctionId) + 1);
+            nameClientsBidList.get(auctionId).add(client.getIdentifier());
 
             client.setState(auctionId, ClientState.RAISING);
-            LOGGER.info("New bid " + newBid + " placed by client " + client.toString()
+            LOGGER.info("New bid " + newBid + " placed by client " + client.getIdentifier()
                     + " on auction : " + auctionsList.get(auctionId).getName() + "\n");
         }
     }
@@ -203,7 +204,7 @@ public class Server extends UnicastRemoteObject implements IServer {
     public synchronized void timeElapsed(UUID auctionId, IClient client) throws RemoteException, InterruptedException {
 
         nbParticipantsList.put(auctionId, nbParticipantsList.get(auctionId) - 1);
-        LOGGER.info("A client time elapsed : " + client.getIdentifier() + "for auction : "
+        LOGGER.info("A client time elapsed : " + client.getIdentifier() + " for auction : "
                 + auctionsList.get(auctionId).getName() + "\n");
 
         if (nbParticipantsList.get(auctionId) == 0) {
@@ -227,6 +228,7 @@ public class Server extends UnicastRemoteObject implements IServer {
             } else {
                 roundWinner(auctionId);
             }
+            nameClientsBidList.get(auctionId).clear();
         }
     }
 
@@ -246,46 +248,57 @@ public class Server extends UnicastRemoteObject implements IServer {
             UUID auctionId = auctionsPair.getKey();
             AuctionBean auctionValue = auctionsPair.getValue();
 
-            if (!(client.getState(auctionsPair.getKey()) == ClientState.RAISING)) {
-                nbParticipantsList.put(auctionId, nbParticipantsList.get(auctionId) - 1);
-            }
+            if(!auctionValue.getSeller().equals(client.getIdentifier())) {
+                if (!(client.getState(auctionsPair.getKey()) == ClientState.RAISING)) {
+                    nbParticipantsList.put(auctionId, nbParticipantsList.get(auctionId) - 1);
+                }
 
-            bidByClientList.get(auctionId).remove(client);
+                bidByClientList.get(auctionId).remove(client);
 
-            LOGGER.info("A client has disconnected : " + client.getIdentifier() + "\n");
+                if(nameClientsBidList.get(auctionId).contains(client.getIdentifier()))
+                    bidThisRoundList.put(auctionId, bidThisRoundList.get(auctionId) - 1);
 
-            // If everybody bid or leave
-            if (nbParticipantsList.get(auctionId) == 0) {
-                // Case of a blank round : the auction is completed
-                if (bidThisRoundList.get(auctionId) == 0) {
+                LOGGER.info("A client has disconnected : " + client.getIdentifier() + " for auction : "
+                        + auctionValue.getName() + " \n");
 
-                    // If the actual client who's quitting the client is suppose to be the winner of one of the auctions, then we change the winner
-                    if(winnersList.get(auctionId) != null && winnersList.get(auctionId).getIdentifier().equals(client.getIdentifier())) {
-                        defineWinner(auctionId);
+                // If everybody bid or leave
+                if (nbParticipantsList.get(auctionId) == 0) {
+                    // Case of a blank round : the auction is completed
+                    if (bidThisRoundList.get(auctionId) == 0) {
+
+                        // If the actual client who's quitting the client is suppose to be the winner of one of the auctions, then we change the winner
+                        if (winnersList.get(auctionId) != null &&
+                                winnersList.get(auctionId).getIdentifier().equals(client.getIdentifier())) {
+                            defineWinner(auctionId);
+                        }
+
+                        // Notify all the clients to show the winner
+                        for (IClient c : clients) {
+                            c.bidSold(auctionId, winnersList.get(auctionId));
+                        }
+
+                        if (winnersList.get(auctionId) != null) {
+                            winnersList.get(auctionId).addWonAuction(auctionValue);
+                        }
+
+                        bidByClientList.get(auctionId).clear();
+
+                        // Validate the registrations of clients in the monitor's queue
+                        validateRegistrations(auctionId);
+                    } else {
+                        roundWinner(auctionId);
                     }
+                    nameClientsBidList.get(auctionId).clear();
+                } else if (winnersList.get(auctionId) != null &&
+                        winnersList.get(auctionId).getIdentifier().equals(client.getIdentifier())) {
+                    defineWinner(auctionId);
 
-                    // Notify all the clients to show the winner
                     for (IClient c : clients) {
-                        c.bidSold(auctionId, winnersList.get(auctionId));
+                        c.updatePrice(auctionId, auctionValue.getPrice());
                     }
-
-                    if (winnersList.get(auctionId) != null) {
-                        winnersList.get(auctionId).addWonAuction(auctionValue);
-                    }
-
-                    bidByClientList.get(auctionId).clear();
-
-                    // Validate the registrations of clients in the monitor's queue
-                    validateRegistrations(auctionId);
-                } else {
-                    roundWinner(auctionId);
                 }
-            } else if (winnersList.get(auctionId) != null && winnersList.get(auctionId).getIdentifier().equals(client.getIdentifier())) {
-                defineWinner(auctionId);
-
-                for (IClient c : clients) {
-                    c.updatePrice(auctionId, auctionValue.getPrice());
-                }
+            }else{
+                LOGGER.info("The seller has disconnected for the auction " + auctionValue.getName() + "\n");
             }
         }
     }
@@ -305,68 +318,75 @@ public class Server extends UnicastRemoteObject implements IServer {
             UUID auctionId = auctionsPair.getKey();
             AuctionBean auctionValue = auctionsPair.getValue();
 
-            int counter = 0;
+            boolean isSeller = false;
+            for (IClient client : clients) {
+                if (auctionValue.getSeller().equals(client.getIdentifier()))
+                    isSeller = true;
+            }
+            if(!isSeller) {
+                int counter = 0;
 
-            for (IClient client : clients){
-                for (String nameClientBid : nameClientsBidList.get(auctionId)) {
-                    if (nameClientBid.equals(client.getIdentifier())) {
-                        break;
+                for (IClient client : clients) {
+                    for (String nameClientBid : nameClientsBidList.get(auctionId)) {
+                        if (nameClientBid.equals(client.getIdentifier())) {
+                            break;
+                        }
+                        counter++;
                     }
-                    counter++;
                 }
-            }
 
-            nbParticipantsList.put(auctionId, nbParticipantsList.get(auctionId) - (clientsCrashed.size() - counter));
+                nbParticipantsList.put(auctionId, nbParticipantsList.get(auctionId) - (clientsCrashed.size() - counter));
 
+                for (IClient client : clientsCrashed) {
+                    bidByClientList.get(auctionId).remove(client);
+                }
 
-            for (IClient client : clientsCrashed){
-                bidByClientList.get(auctionId).remove(client);
-            }
+                LOGGER.info(clientsCrashed.size() + " clients have crashed \n");
 
-            LOGGER.info(clientsCrashed.size() + " clients have crashed \n");
+                // If everybody bid or leave
+                if (nbParticipantsList.get(auctionId) == 0) {
+                    // Case of a blank round : the auction is completed
+                    if (bidThisRoundList.get(auctionId) == 0) {
 
-            // If everybody bid or leave
-            if (nbParticipantsList.get(auctionId) == 0) {
-                // Case of a blank round : the auction is completed
-                if (bidThisRoundList.get(auctionId) == 0) {
+                        // If one of the clients who crashed is the winner we change it with someone else
+                        if (winnersList.get(auctionId) != null) {
+                            try {
+                                winnersList.get(auctionId).getName();
+                            } catch (Exception e) {
+                                defineWinner(auctionId);
+                            }
+                        }
 
-                    // If one of the clients who crashed is the winner we change it with someone else
-                    if(winnersList.get(auctionId) != null){
-                        try{
+                        // Notify all the clients to show the winner
+                        for (IClient c : clients) {
+                            c.bidSold(auctionId, winnersList.get(auctionId));
+                        }
+
+                        if (winnersList.get(auctionId) != null) {
+                            winnersList.get(auctionId).addWonAuction(auctionValue);
+                        }
+
+                        bidByClientList.get(auctionId).clear();
+
+                        // Validate the registrations of clients in the monitor's queue
+                        validateRegistrations(auctionId);
+                    } else {
+                        roundWinner(auctionId);
+                    }
+
+                    nameClientsBidList.get(auctionId).clear();
+                } else {
+                    if (winnersList.get(auctionId) != null) {
+                        try {
                             winnersList.get(auctionId).getName();
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             defineWinner(auctionId);
                         }
                     }
-
-                    // Notify all the clients to show the winner
                     for (IClient c : clients) {
-                        c.bidSold(auctionId, winnersList.get(auctionId));
-                    }
-
-                    if (winnersList.get(auctionId) != null) {
-                        winnersList.get(auctionId).addWonAuction(auctionValue);
-                    }
-
-                    bidByClientList.get(auctionId).clear();
-
-                    // Validate the registrations of clients in the monitor's queue
-                    validateRegistrations(auctionId);
-                } else {
-                    roundWinner(auctionId);
-                }
-            } else {
-                if(winnersList.get(auctionId) != null){
-                    try{
-                        winnersList.get(auctionId).getName();
-                    }catch(Exception e){
-                        defineWinner(auctionId);
+                        c.updatePrice(auctionId, auctionValue.getPrice());
                     }
                 }
-                for (IClient c : clients) {
-                    c.updatePrice(auctionId, auctionValue.getPrice());
-                }
-
             }
         }
     }
@@ -399,15 +419,27 @@ public class Server extends UnicastRemoteObject implements IServer {
             LOGGER.info("End of a round. Bid = " + auctionsList.get(auctionId).getPrice()
                     + " - The current winner is " + winnersList.get(auctionId).getIdentifier() + "\n");
 
+            boolean sellerStillHere = false;
+            for (IClient client : clients) {
+                if (auctionsList.get(auctionId).getSeller().equals(client.getIdentifier()))
+                    sellerStillHere = true;
+            }
+
             // clean the data structures before the next round
-            nbParticipantsList.put(auctionId, clients.size() - 1);
+            if(sellerStillHere)
+                nbParticipantsList.put(auctionId, clients.size() - 1);
+            else
+                nbParticipantsList.put(auctionId, clients.size());
+
+
 
             // notify the clients of the new price & start a new round
             for (IClient c : clients) {
                 c.newPrice(auctionId, auctionsList.get(auctionId).getPrice());
             }
         } else {
-            LOGGER.info("There is no winners in this round \n");
+            LOGGER.info("There is no winners in this round for the auction : "
+                    + auctionsList.get(auctionId).getName() + "\n");
         }
 
     }
@@ -450,7 +482,8 @@ public class Server extends UnicastRemoteObject implements IServer {
             }
         } else{
             winnersList.put(auctionId, null);
-            LOGGER.info("There is no winner found \n");
+            LOGGER.info("There is no winner found for the auction : "
+                    + auctionsList.get(auctionId).getName() + "\n");
         }
     }
 }

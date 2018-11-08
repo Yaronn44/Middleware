@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface ITimerObservable  {
     void addTimerObserver(UUID auctionId, ITimerObserver observer);
 
-    void removeTimerObserver(ITimerObserver observer);
+    void removeTimerObserver(UUID auctionId);
 }

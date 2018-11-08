@@ -62,5 +62,7 @@ public interface IClient extends Remote, Serializable {
 
     void setState(UUID auctionId, ClientState newState) throws RemoteException;
 
+    public boolean getIsSeller(UUID auctionId) throws RemoteException;
+
     void setIsSeller(UUID auctionId, boolean v) throws RemoteException;
 }

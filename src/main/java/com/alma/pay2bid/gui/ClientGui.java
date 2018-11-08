@@ -153,6 +153,7 @@ public class ClientGui {
      * @param auctionBean
      */
     private void addAuctionPanel(AuctionBean auctionBean){
+
         if(!auctionsList.containsKey(auctionBean.getUuid())) {
             LOGGER.info("Add new auction to auctionPanel \n");
 
@@ -161,34 +162,44 @@ public class ClientGui {
             
             JButton raiseBidButton = new JButton("Raise the bid");
             raiseBidButton.setActionCommand("raiseBid");
-
             raiseBidButton.addActionListener(new RaiseBidButtonListener(auctionBean.getUuid(), client, client.getServer(), auction, statusLabel));
-            if (this.client.getIsSeller(auctionBean.getUuid())) {
-              raiseBidButton.setEnabled(false);
-              raiseBidButton.setVisible(false);
-              auction.setEnableBidTextField(false);
-              auction.setEnableBidTextFieldVisible(false);
+            try {
+                if (this.client.getIsSeller(auctionBean.getUuid())) {
+                    raiseBidButton.setEnabled(false);
+                    raiseBidButton.setVisible(false);
+                    auction.setEnableBidTextField(false);
+                    auction.setEnableBidTextFieldVisible(false);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
+
             auction.setRaiseButton(raiseBidButton);
 
 
             //Now add the observer to receive all price updates
-            client.addNewPriceObserver(new INewPriceObserver() {
+            client.addNewPriceObserver(auctionBean.getUuid(), new INewPriceObserver() {
                 @Override
                 public void updateNewPrice(UUID auctionId, Integer price) {
                     setAuctionPrice(auctionId, price);
-                    if (!client.getIsSeller(auctionId)) {
-                    		auction.enable();
-                    }		
+                    try {
+                        if (!client.getIsSeller(auctionId)) {
+                            auction.enable();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             });
 
             // Add a observer to receive the notification when the bid is sold
-            client.addBidSoldObserver(new IBidSoldObserver() {
+            client.addBidSoldObserver(auctionBean.getUuid(), new IBidSoldObserver() {
                 @Override
                 public void updateBidSold(IClient client) {
                     try {
                         auction.setWinner(client.getIdentifier());
+                        //deleteAuctionPanel(auctionBean.getUuid());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -197,6 +208,7 @@ public class ClientGui {
                 @Override
                 public void updateBidSold() {
                     auction.setWinner(null);
+                    //deleteAuctionPanel(auctionBean.getUuid());
                 }
             });
 
@@ -219,6 +231,17 @@ public class ClientGui {
         }
     }
 
+    // Use this if you want to delete the completed auctions from the auctions panel
+    /*
+    void deleteAuctionPanel(UUID auctionId){
+        auctionPanel.remove(auctionsList.get(auctionId).getAuctionPanel());
+        auctionsList.remove(auctionId);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        mainFrame.repaint();
+    }
+    */
+
     /**
      * Set an new price for a given AuctionBean
      */
@@ -229,10 +252,14 @@ public class ClientGui {
         // Update auction in our list
         auction.setPrice(newPrice);
 
-          //update the current winner
+        //update the current winner
         try {
-          auction.setCurrentWinner(server.getWinner(auctionId).getIdentifier());
-        } catch (RemoteException e){
+            if(server.getWinner(auctionId) != null) {
+                auction.setCurrentWinner(server.getWinner(auctionId).getIdentifier());
+            } else{
+                auction.setCurrentWinner("No winner found !");
+            }
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
 
@@ -256,5 +283,4 @@ public class ClientGui {
         AuctionWinView wonAuctions = new AuctionWinView();
         wonAuctions.showWonAuctions(client.getWonAuctions());
     }
-
 }
